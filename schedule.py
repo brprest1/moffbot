@@ -13,13 +13,11 @@ date_today = int(datetime.today().strftime('%d'))
 
 # realm cycle
 realm_cycle = ['Daylight Prairie', 'Hidden Forest', 'Valley of Triumph', 'Golden Wasteland', 'Vault of Knowledge']
-todays_realm = realm_cycle[(date_today - 1) % len(realm_cycle)]
-print(todays_realm)
+realm = realm_cycle[(date_today - 1) % len(realm_cycle)]
 
-# timing cycle
-timing_cycle = [2, 1, 3, 0, 4, 1, 2, 0, 3, 1, 4, 0]
-todays_time_num = timing_cycle[(date_today - 1) % len(timing_cycle)]
-print(todays_time_num)
+# group cycle
+group_cycle = [2, 1, 3, 0, 4, 1, 2, 0, 3, 1, 4, 0]
+group = group_cycle[(date_today - 1) % len(group_cycle)]
 
 # areas
 areas = {
@@ -30,15 +28,34 @@ areas = {
     'Vault of Knowledge': ['Starlight Desert', 'Starlight Desert', 'Jellyfish Cove', 'Jellyfish Cove', 'Jellyfish Cove']
 }
 
-# group 0
-class Group0:
-    def __init__(self, todays_realm):
-        todays_color = 'Black'
-        todays_rewards = '200 wax'
-        todays_timings = '1:58'
-        todays_area = areas[todays_realm][0]
+class Groups:
+    def __init__(self, weekday, areas, realm, dst):
+        self.weekday = weekday
+        self.realm = realm
+        self.areas = areas
+        self.dst = dst
 
-if todays_time_num == 0:
-    today = Group0(todays_realm)
+    def group0(self):
+        self.color = 'Black'
+        if self.dst == '0':
+            pass
+        self.timing = '1:58 AM - 5:58 AM, 9:58 AM - 1:58 PM, 5:58 PM - 9:58 PM'
+        if self.weekday in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']:
+            self.availability = True
+        else:
+            self.availability = False
+        self.reward = '200 wax'
+        self.area = self.areas[self.realm][0]
 
-print(f'{todays_color} {todays_rewards} {todays_timings} {todays_area}')
+    def print_info(self):
+        print(f"Color: {self.color}")
+        print(f"Realm: {self.realm}")
+        print(f"Area: {self.area}")
+        print(f"Timing: {self.timing}")
+        print(f"Availability: {self.availability}")
+        print(f"Reward: {self.reward}")
+
+
+groups = Groups(weekday, areas, realm, dst)
+groups.group0()
+groups.print_info()
