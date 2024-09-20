@@ -21,29 +21,24 @@ timing_cycle = [2, 1, 3, 0, 4, 1, 2, 0, 3, 1, 4, 0]
 todays_time_num = timing_cycle[(date_today - 1) % len(timing_cycle)]
 print(todays_time_num)
 
+# areas
+areas = {
+    'Daylight Prairie': ['Butterfly Fields', 'Village Islands', 'Prairie Caves', 'Bird Nest', 'Sanctuary Islands'],
+    'Hidden Forest': ['Forest Brook', 'Boneyard', 'Forest End', 'Treehouse', 'Elevated Clearing'],
+    'Valley of Triumph': ['Ice Rink', 'Ice Rink', 'Village of Dreams', 'Village of Dreams', 'Hermit Valley'],
+    'Golden Wasteland': ['Broken Temple', 'Battlefield', 'Graveyard', 'Crab Fields', 'Forgotten Ark'],
+    'Vault of Knowledge': ['Starlight Desert', 'Starlight Desert', 'Jellyfish Cove', 'Jellyfish Cove', 'Jellyfish Cove']
+}
+
 # group 0
 class Group0:
-    def __init__(self, color, area, rewards, timings, availability):
-        self.color = 'Black'
-        
-        if todays_realm == 'Daylight Prairie':
-            self.area = 'Butterfly Fields'
-        elif todays_realm == 'Hidden Forest':
-            self.area = 'Forest Brook'
-        elif todays_realm == 'Valley of Triumph':
-            self.area = 'Ice Rink'
-        elif todays_realm == 'Golden Wasteland':
-            self.area = 'Broken Temple'
-        elif todays_realm == 'Vault of Knowledge':
-            self.area = 'Starlight Desert'
-
-        self.rewards = '200 wax'
-
-        if weekday == 'Monday' or 'Tuesday' or 'Wednesday' or 'Thursday' or 'Friday':
-            self.availability == True
-        elif weekday == 'Saturday' or 'Sunday':
-            self.availability == False
+    def __init__(self, todays_realm):
+        todays_color = 'Black'
+        todays_rewards = '200 wax'
+        todays_timings = '1:58'
+        todays_area = areas[todays_realm][0]
 
 if todays_time_num == 0:
-    todays_group = Group0()
-    print(todays_group)
+    today = Group0(todays_realm)
+
+print(f'{todays_color} {todays_rewards} {todays_timings} {todays_area}')
